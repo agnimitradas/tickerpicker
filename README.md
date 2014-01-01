@@ -22,6 +22,7 @@ Or install it yourself as:
 Register stocks from avaliable stock list
 
     TickerPicker::Ticker.register "mtgox"
+    TickerPicker::Ticker.register "btce"
     
 Or register multiple stocks:
 
@@ -29,19 +30,20 @@ Or register multiple stocks:
 
 Get prices from the stock's specific market:
 
-    prices = TickerPicker::Ticker.get_prices 'mtgox', 'btc_usd'
+    prices_mtgox_usd = TickerPicker::Ticker.get_prices 'mtgox', 'btc_usd'
+    prices_bitstamp_usd = TickerPicker::Ticker.get_prices 'bitstamp', 'btc_usd'
     
 Print all prices as hash:
 
-    puts prices.to_dh
+    puts prices_mtgox_usd.to_dh
     
 Print specific info from prices:
 
-    puts prices.ask
-    puts prices.bid
-    puts prices.last
-    puts prices.timestamp
-    puts prices.currency
+    puts prices_mtgox_usd.ask
+    puts prices_mtgox_usd.bid
+    puts prices_mtgox_usd.last
+    puts prices_mtgox_usd.timestamp
+    puts prices_mtgox_usd.currency
 
 Get prices from the stock
 
@@ -89,10 +91,17 @@ Add new markets to the stocks(sample: your stocks.yml)
 
 ## Available Stocks
 
-MTGOX
-BTC-E
-BITSTAMP
-BTCTURK
+BTC-E (btce)
+
+BITSTAMP (bitstamp)
+
+BTCTURK (btcturk)
+
+MTGOX (mtgox)
+
+## Donations
+I accept donations :)
+https://blockchain.info/address/182dMXGmdVYgv6m1qXq3tncoPfDfBmvtBM
 
 ## Contributing
 
