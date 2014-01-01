@@ -1,0 +1,9 @@
+developer:
+  btc_xxx:
+    url: 'developer.json'
+    currency: 'XXX'
+tester:
+  btc_xyz:
+    url: 'tester.json'
+    currency: 'XYZ'
+    
