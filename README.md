@@ -73,9 +73,6 @@ Add new markets to the stocks(sample: your stocks.yml)
       btc_eur:
         url: 'https://btc-e.com/api/2/btc_eur/ticker'
         currency: 'EUR'
-      btc_rub:
-        url: 'https://btc-e.com/api/2/btc_rub/ticker'
-        currency: 'RUB'
     btcturk:
       btc_try:
         url: 'https://btcturk.com/api/ticker/'

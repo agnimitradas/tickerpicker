@@ -54,7 +54,7 @@ module TickerPicker
       # * +Hash+ - Hash of information for given stock-market uri
       #
       def gather_info(url)
-        response = open(url, 'User-Agent' => user_agent, read_timeout: 2).read
+        response = url =~ URI::regexp ? open(url, 'User-Agent' => user_agent, read_timeout: 2).read : open(url).read
         JSON.parse(response)
       end
 
