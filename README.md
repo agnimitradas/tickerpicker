@@ -20,17 +20,23 @@ Or install it yourself as:
 
 ## Usage
 Register stocks from avaliable stock list
+
     TickerPicker::Ticker.register "mtgox"
+    
 Or register multiple stocks:
+
     TickerPicker::Ticker.register_list ["mtgox", "btce", "bitstamp"]
 
 Get prices from the stock's specific market:
+
     prices = TickerPicker::Ticker.get_prices 'mtgox', 'btc_usd'
     
 Print all prices as hash:
+
     puts prices.to_dh
     
 Print specific info from prices:
+
     puts prices.ask
     puts prices.bid
     puts prices.last
@@ -38,18 +44,22 @@ Print specific info from prices:
     puts prices.currency
 
 Get prices from the stock
+
     mtgox_markets = TickerPicker::Ticker.get_all_stock_prices 'mtgox'
 
 Get prices from all avaliable stock-markets
+
     all_stock_markets = TickerPicker::Ticker.get_all_stock_market_prices
 
 ## Configuration (optional & advanced)
 Set your stocks.yml file path if you need to modify default
+
     TickerPicker.configure  do |config|
       config.stock_configuration_file = "#{File.dirname(__FILE__)}/stocks.yml" # your stocks.yml path
     end
 
 Add new markets to the stocks(sample: your stocks.yml)
+
     bitstamp:
       btc_usd:
         url: 'https://www.bitstamp.net/api/ticker/'
@@ -78,6 +88,7 @@ Add new markets to the stocks(sample: your stocks.yml)
 
 
 ## Available Stocks
+
 MTGOX
 BTC-E
 BITSTAMP
