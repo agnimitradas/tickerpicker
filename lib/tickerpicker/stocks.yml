@@ -2,22 +2,58 @@ bitstamp:
   btc_usd:
     url: 'https://www.bitstamp.net/api/ticker/'
     currency: 'USD'
+    mappings: 
+      ask: "['ask']"
+      bid: "['bid']"
+      last: "['last']"
+      timestamp: "['timestamp']"
+      timestamp_representation: 'milliseconds'
 btce:
   btc_usd:
     url: 'https://btc-e.com/api/2/btc_usd/ticker'
     currency: 'USD'
+    mappings: 
+      ask: "['ticker']['buy']"
+      bid: "['ticker']['sell']"
+      last: "['ticker']['last']"
+      timestamp: "['ticker']['updated']"
+      timestamp_representation: 'milliseconds'
   btc_eur:
     url: 'https://btc-e.com/api/2/btc_eur/ticker'
     currency: 'EUR'
+    mappings: 
+      ask: "['ticker']['buy']"
+      bid: "['ticker']['sell']"
+      last: "['ticker']['last']"
+      timestamp: "['ticker']['updated']"
+      timestamp_representation: 'milliseconds'
 btcturk:
   btc_try:
     url: 'https://btcturk.com/api/ticker/'
     currency: 'TRY'
+    mappings: 
+      ask: "['ask']"
+      bid: "['bid']"
+      last: "['last']"
+      timestamp: "['timestamp']"
+      timestamp_representation: 'milliseconds'
 mtgox:
   btc_usd:
     url: 'http://data.mtgox.com/api/2/BTCUSD/money/ticker_fast'
     currency: 'USD'
+    mappings: 
+      ask: "['data']['sell']['value']"
+      bid: "['data']['buy']['value']"
+      last: "['data']['last']['value']"
+      timestamp: "['data']['now']"
+      timestamp_representation: 'microseconds'
   btc_eur:
     url: 'http://data.mtgox.com/api/2/BTCEUR/money/ticker_fast'
     currency: 'EUR'
+    mappings: 
+      ask: "['data']['sell']['value']"
+      bid: "['data']['buy']['value']"
+      last: "['data']['last']['value']"
+      timestamp: "['data']['now']"
+      timestamp_representation: 'microseconds'
     

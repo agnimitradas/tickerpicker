@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = TickerPicker::VERSION
   spec.authors       = ["Mustafa Turan"]
   spec.email         = ["mustafaturan.net@gmail.com"]
-  spec.description   = %q{Ticker Picker for cryto currencies like BTC, LTC in world stocks}
-  spec.summary       = %q{Ticker Picker for cryto currencies like BTC, LTC}
+  spec.description   = %q{A generalized ticker picker library for cryto currencies like #BTC(bitcoin), #LTC(litecoin) in world stock markets.}
+  spec.summary       = spec.description
   spec.homepage      = "https://github.com/mustafaturan/tickerpicker"
   spec.license       = "MIT"
 

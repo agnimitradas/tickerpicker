@@ -1,9 +1,21 @@
 developer:
   btc_xxx:
-    url: 'developer.json'
+    url: 'test/unit/json/developer.json'
     currency: 'XXX'
+    mappings: 
+      ask: "['btc_xxx']['ask']"
+      bid: "['btc_xxx']['bid']"
+      last: "['btc_xxx']['last']"
+      timestamp: "['btc_xxx']['timestamp']"
+      timestamp_representation: 'milliseconds'
 tester:
   btc_xyz:
-    url: 'tester.json'
+    url: 'test/unit/json/tester.json'
     currency: 'XYZ'
+    mappings: 
+      ask: "['sell']"
+      bid: "['buy']"
+      last: "['last']"
+      timestamp: "['timestamp']"
+      timestamp_representation: 'microseconds'
     

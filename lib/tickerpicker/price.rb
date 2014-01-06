@@ -9,10 +9,10 @@ module TickerPicker
     attr_accessor :timestamp
 
     def initialize(price_hash = {})
-      @ask = price_hash[:ask] || 0.0
-      @bid = price_hash[:bid] || 0.0
+      @ask = price_hash[:ask].to_f || 0.0
+      @bid = price_hash[:bid].to_f || 0.0
       @currency = price_hash[:currency] || ''
-      @last = price_hash[:last] || 0.0
+      @last = price_hash[:last].to_f || 0.0
       @timestamp = price_hash[:timestamp].to_f || Time.now.to_f
     end
 
@@ -21,26 +21,30 @@ module TickerPicker
       #
       # ==== Parameters
       #
+      # * +stock+ - string
       # * +market+ - string
       #
       # === Returns
       #
       # * +TickerPicker::Price+ - TickerPicker::Price instance object
       #
-      def get_prices(market)
-        instance_mapping gather_info(markets[market]['url']), markets[market]['currency']
+      def fetch(stock, market)
+        instance_mapping gather_info(markets(stock)[market]['url']), markets(stock)[market]
       end
 
-      # Abstact method for list of markets in the stock
+      private
+      # Get prices for the market
       #
-      def markets
-        raise NotImplementedError.new("#{self.class.name}##{__callee__} method is not implemented!")
-      end
-      
-      # Abstact method for mapping foreign data with local instance
+      # ==== Parameters
       #
-      def instance_mapping
-        raise NotImplementedError.new("#{self.class.name}##{__callee__} method is not implemented!")
+      # * +stock+ - string
+      #
+      # === Returns
+      #
+      # * Hash of markets
+      #
+      def markets(stock)
+        TickerPicker::Configuration.avaliable_stocks[stock]
       end
 
       # Get information from stock-market uri and convert it into Hash
@@ -61,6 +65,19 @@ module TickerPicker
       # nodoc
       def user_agent
         "TickerPicker Bot v#{TickerPicker::VERSION}"
+      end
+
+      # nodoc
+      def instance_mapping(res_hash, stock_market)
+        timestamp = eval("res_hash#{stock_market['mappings']['timestamp']}").to_f
+        timestamp /= 1000000 if stock_market['mappings']['timestamp_representation'].eql?('microseconds')
+        new({
+          ask: ("%f" % eval("res_hash#{stock_market['mappings']['ask']}")),
+          bid: ("%f" % eval("res_hash#{stock_market['mappings']['bid']}")),
+          currency: stock_market['currency'],
+          last: ("%f" % eval("res_hash#{stock_market['mappings']['last']}")),
+          timestamp: timestamp 
+        })
       end
     end
   end
