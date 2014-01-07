@@ -69,15 +69,18 @@ module TickerPicker
 
       # nodoc
       def instance_mapping(res_hash, stock_market)
-        timestamp = eval("res_hash#{stock_market['mappings']['timestamp']}").to_f
-        timestamp /= 1000000 if stock_market['mappings']['timestamp_representation'].eql?('microseconds')
         new({
           ask: ("%f" % eval("res_hash#{stock_market['mappings']['ask']}")),
           bid: ("%f" % eval("res_hash#{stock_market['mappings']['bid']}")),
           currency: stock_market['currency'],
           last: ("%f" % eval("res_hash#{stock_market['mappings']['last']}")),
-          timestamp: timestamp 
+          timestamp: timestamp(eval("res_hash#{stock_market['mappings']['timestamp']}").to_f, stock_market['mappings']['timestamp_representation'])
         })
+      end
+
+      # nodoc
+      def timestamp(timestamp, timestamp_representation)
+        timestamp_representation.eql?('microseconds') ? timestamp / 1000000 : timestamp
       end
     end
   end
