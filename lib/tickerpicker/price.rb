@@ -9,11 +9,11 @@ module TickerPicker
     attr_accessor :timestamp
 
     def initialize(price_hash = {})
-      @ask = price_hash[:ask].to_f || 0.0
-      @bid = price_hash[:bid].to_f || 0.0
-      @currency = price_hash[:currency] || ''
-      @last = price_hash[:last].to_f || 0.0
-      @timestamp = price_hash[:timestamp].to_f || Time.now.to_f
+      @ask = price_hash[:ask] || 0.0
+      @bid = price_hash[:bid] || 0.0
+      @currency = price_hash[:currency] || 'N/A'
+      @last = price_hash[:last] || 0.0
+      @timestamp = price_hash[:timestamp] || Time.now.to_f
     end
 
     class << self
@@ -29,7 +29,7 @@ module TickerPicker
       # * +TickerPicker::Price+ - TickerPicker::Price instance object
       #
       def fetch(stock, market)
-        instance_mapping gather_info(markets(stock)[market]['url']), markets(stock)[market]
+        instance_mapping gather_info(markets(stock)[market]['url']), markets(stock)[market]['mappings'], markets(stock)[market]['currency']
       end
 
       private
@@ -68,19 +68,32 @@ module TickerPicker
       end
 
       # nodoc
-      def instance_mapping(res_hash, stock_market)
+      def instance_mapping(res_hash, mappings, currency)
         new({
-          ask: ("%f" % eval("res_hash#{stock_market['mappings']['ask']}")),
-          bid: ("%f" % eval("res_hash#{stock_market['mappings']['bid']}")),
-          currency: stock_market['currency'],
-          last: ("%f" % eval("res_hash#{stock_market['mappings']['last']}")),
-          timestamp: timestamp(eval("res_hash#{stock_market['mappings']['timestamp']}").to_f, stock_market['mappings']['timestamp_representation'])
+          ask: hash_val_to_f(res_hash, mappings['ask']),
+          bid: hash_val_to_f(res_hash, mappings['bid']),
+          currency: currency,
+          last: hash_val_to_f(res_hash, mappings['last']),
+          timestamp: timestamp(
+            hash_val_to_f(res_hash, mappings['timestamp']),
+            mappings['timestamp_representation']
+          )
         })
       end
 
       # nodoc
       def timestamp(timestamp, timestamp_representation)
         timestamp_representation.eql?('microseconds') ? timestamp / 1000000 : timestamp
+      end
+
+      # nodoc
+      def hash_val(hash, key)
+        eval("hash#{key}")
+      end
+
+      # nodoc
+      def hash_val_to_f(hash, key)
+        ("%f" % hash_val(hash, key)).to_f
       end
     end
   end
