@@ -1,6 +1,7 @@
 # TickerPicker
 
 [![Build Status](https://travis-ci.org/mustafaturan/tickerpicker.png)](https://travis-ci.org/mustafaturan/tickerpicker) [![Code Climate](https://codeclimate.com/github/mustafaturan/tickerpicker.png)](https://codeclimate.com/github/mustafaturan/tickerpicker)
+[![Gem Version](https://badge.fury.io/rb/tickerpicker.png)](http://badge.fury.io/rb/tickerpicker)
 
 A generalized ticker picker library for cryto currencies like #BTC(bitcoin), #LTC(litecoin) in world stock markets.
 
