@@ -20,8 +20,8 @@ module TickerPicker
         @@defaults
       end
 
-      def avaliable_stocks
-        @avaliable_stocks ||= YAML.load_file(TickerPicker.config.stock_configuration_file)
+      def stocks
+        @stocks ||= YAML.load_file(TickerPicker.config.stock_configuration_file)
       end
     end
 

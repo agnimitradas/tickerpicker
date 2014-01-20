@@ -21,33 +21,17 @@ module TickerPicker
       #
       # ==== Parameters
       #
-      # * +stock_name+ - string
-      # * +market_name+ - string
+      # * +stock_market+ Hash of stock-market information
       #
       # === Returns
       #
       # * +TickerPicker::Price+ - TickerPicker::Price instance object
       #
-      def fetch(stock_name, market_name)
-        stock_market = get_stock_market(stock_name, market_name)
+      def fetch(stock_market)
         instance_mapping gather_info(stock_market['url']), stock_market['mappings'], stock_market['currency']
       end
 
       private
-      # Get prices for the market
-      #
-      # ==== Parameters
-      #
-      # * +stock_name+ - string
-      # * +market_name+ - string
-      #
-      # === Returns
-      #
-      # * Hash of markets
-      #
-      def get_stock_market(stock_name, market_name)
-        TickerPicker::Configuration.avaliable_stocks[stock_name][market_name]
-      end
 
       # Get information from stock-market uri and convert it into Hash
       #
